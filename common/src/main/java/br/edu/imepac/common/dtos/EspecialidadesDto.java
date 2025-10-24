@@ -1,6 +1,6 @@
 package br.edu.imepac.common.dtos;
 
-public class Especialidadesdto {
+public class EspecialidadesDto {
 
     //atributos
 
