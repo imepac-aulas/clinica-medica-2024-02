@@ -1,14 +1,12 @@
 package br.edu.imepac.common.dtos;
 
+import lombok.Data;
 
-    public class ConvenioDTO {
-
-        private Long id;
-        private String nome;
-        private String empresa;
-
-
-
-    }
+@Data
+public class ConvenioDTO {
+    private Long id;
+    private String nome;
+    private String empresa;
+}
 
 
