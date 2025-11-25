@@ -1,4 +1,4 @@
-package br.edu.imepac.common.dtos.especialidade;
+package br.edu.imepac.common.entidades;
 
 public class Especialidade {
 
