@@ -15,8 +15,14 @@ public class Convenio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String empresaConvenio;   // Empresa_Convenio
-    private String cnpj;              // CNPJ
-    private String telefone;          // Telefone
+    @Column(nullable = false)
+    private String nome;
 
+    @Column(nullable = false)
+    private String cnpj;
+
+    @Column(nullable = false)
+    private String email;
+
+    private String telefone;
 }
