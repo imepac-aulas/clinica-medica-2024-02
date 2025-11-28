@@ -1,61 +1,22 @@
 package br.edu.imepac.common.entidades;
 
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "convenios")
+@Data
+@NoArgsConstructor
 public class Convenio {
 
-    private Long codigoConvenio;      // Codigo_Convenio
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String empresaConvenio;   // Empresa_Convenio
     private String cnpj;              // CNPJ
     private String telefone;          // Telefone
 
-    public Convenio() {
-    }
-
-    public Convenio(Long codigoConvenio, String empresaConvenio, String cnpj, String telefone) {
-        this.codigoConvenio = codigoConvenio;
-        this.empresaConvenio = empresaConvenio;
-        this.cnpj = cnpj;
-        this.telefone = telefone;
-    }
-
-    public Long getCodigoConvenio() {
-        return codigoConvenio;
-    }
-
-    public void setCodigoConvenio(Long codigoConvenio) {
-        this.codigoConvenio = codigoConvenio;
-    }
-
-    public String getEmpresaConvenio() {
-        return empresaConvenio;
-    }
-
-    public void setEmpresaConvenio(String empresaConvenio) {
-        this.empresaConvenio = empresaConvenio;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    @Override
-    public String toString() {
-        return "Convenio{" +
-                "codigoConvenio=" + codigoConvenio +
-                ", empresaConvenio='" + empresaConvenio + '\'' +
-                ", cnpj='" + cnpj + '\'' +
-                ", telefone='" + telefone + '\'' +
-                '}';
-    }
 }
