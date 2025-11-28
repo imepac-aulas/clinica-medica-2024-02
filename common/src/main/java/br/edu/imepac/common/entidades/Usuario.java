@@ -3,9 +3,10 @@ package br.edu.imepac.common.entidades;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+
 @Entity
 @Table(name = "usuarios")
+@Data
 public class Usuario {
 
     @Id
