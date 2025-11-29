@@ -28,5 +28,18 @@ public class Usuario {
         INATIVO
     }
 
+    @ManyToOne
+    @JoinColumn(name = "perfil_id")
+    private Perfil perfil;
+
+    @OneToOne
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
+
+    @OneToOne
+    @JoinColumn(name = "secretaria_id")
+    private Secretaria secretaria;
+
+
 }
 
