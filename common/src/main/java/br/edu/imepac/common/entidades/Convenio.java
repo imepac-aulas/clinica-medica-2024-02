@@ -15,6 +15,18 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Entity
+@Table(name = "convenio")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Convenio {
 
     @Id
@@ -37,4 +49,13 @@ public class Convenio {
 
     @NotBlank(message = "O telefone é obrigatório.")
     private String telefone;
+}
+    @Column(nullable = false, length = 100)
+    private String nome;
+
+    @Column(unique = true, length = 50)
+    private String codigo;
+
+    @Column(length = 255)
+    private String descricao;
 }
