@@ -5,6 +5,7 @@ import br.edu.imepac.agendamento.dtos.paciente.PacienteDTO;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteUpdateRequest;
 import br.edu.imepac.agendamento.exceptions.BusinessException;
 import br.edu.imepac.agendamento.exceptions.ResourceNotFoundException;
+import br.edu.imepac.common.apis.PacienteResponse;
 import br.edu.imepac.common.entidades.Paciente;
 import br.edu.imepac.common.repositories.PacienteRepository;
 import lombok.RequiredArgsConstructor;
@@ -100,5 +101,20 @@ public class PacienteService {
             throw new ResourceNotFoundException("Paciente não encontrado com id: " + id);
         }
         pacienteRepository.deleteById(id);
+    }
+
+    public PacienteResponse buscarParaIntegracao(Long id) {
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado"));
+
+        PacienteResponse response = new PacienteResponse();
+        response.setId(paciente.getId());
+        response.setNome(paciente.getNome());
+        response.setTelefone(paciente.getTelefone());
+        response.setEmail(paciente.getEmail());
+        response.setCpf(paciente.getCpf());
+        response.setNumeroCartaoSUS(paciente.getNumeroCartaoSUS());
+        response.setDataNascimento(paciente.getDataNascimento());
+        return response;
     }
 }
