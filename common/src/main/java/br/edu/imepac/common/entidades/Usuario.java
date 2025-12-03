@@ -32,6 +32,10 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private EnumStatusUsuario status = EnumStatusUsuario.ATIVO;
 
+    @OneToOne
+    @JoinColumn(name = "secretaria_id")
+    private Secretaria secretaria;
+
     public enum EnumStatusUsuario {
         ATIVO,
         INATIVO
