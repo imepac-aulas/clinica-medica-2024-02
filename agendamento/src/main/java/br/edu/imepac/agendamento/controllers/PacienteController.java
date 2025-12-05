@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.controllers.paciente;
+package br.edu.imepac.agendamento.controllers;
 
 import br.edu.imepac.agendamento.dtos.paciente.PacienteCreateRequest;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteDTO;

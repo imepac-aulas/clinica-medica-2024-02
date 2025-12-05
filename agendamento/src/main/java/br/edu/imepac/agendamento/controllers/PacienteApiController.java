@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.controllers.paciente;
+package br.edu.imepac.agendamento.controllers;
 
 import br.edu.imepac.agendamento.services.paciente.PacienteService;
 import br.edu.imepac.common.apis.PacienteApi;
