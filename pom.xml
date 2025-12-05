@@ -21,6 +21,7 @@
         <module>agendamento</module>
         <module>administrativo</module>
         <module>common</module>
+        <module>migration</module>
     </modules>
 
     <properties>
