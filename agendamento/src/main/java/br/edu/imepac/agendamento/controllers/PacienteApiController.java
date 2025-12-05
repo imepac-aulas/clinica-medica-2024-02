@@ -1,6 +1,6 @@
 package br.edu.imepac.agendamento.controllers;
 
-import br.edu.imepac.agendamento.services.paciente.PacienteService;
+import br.edu.imepac.agendamento.services.PacienteService;
 import br.edu.imepac.common.apis.PacienteApi;
 import br.edu.imepac.common.apis.PacienteResponse;
 import lombok.RequiredArgsConstructor;

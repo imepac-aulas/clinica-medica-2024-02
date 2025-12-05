@@ -3,7 +3,7 @@ package br.edu.imepac.agendamento.controllers;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteCreateRequest;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteDTO;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteUpdateRequest;
-import br.edu.imepac.agendamento.services.paciente.PacienteService;
+import br.edu.imepac.agendamento.services.PacienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
