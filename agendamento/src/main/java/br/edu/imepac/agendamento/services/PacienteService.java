@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.services.paciente;
+package br.edu.imepac.agendamento.services;
 
 import br.edu.imepac.agendamento.dtos.paciente.PacienteCreateRequest;
 import br.edu.imepac.agendamento.dtos.paciente.PacienteDTO;
@@ -7,7 +7,7 @@ import br.edu.imepac.agendamento.exceptions.BusinessException;
 import br.edu.imepac.agendamento.exceptions.ResourceNotFoundException;
 import br.edu.imepac.common.apis.PacienteResponse;
 import br.edu.imepac.common.entidades.Paciente;
-import br.edu.imepac.common.repositories.PacienteRepository;
+import br.edu.imepac.agendamento.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
