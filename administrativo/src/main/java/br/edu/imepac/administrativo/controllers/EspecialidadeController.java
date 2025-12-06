@@ -5,6 +5,7 @@ import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeUpdateRequest;
 import br.edu.imepac.administrativo.services.EspecialidadeService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/especialidades")
+@Slf4j
 public class EspecialidadeController {
 
     private final EspecialidadeService especialidadeService;
@@ -23,6 +25,8 @@ public class EspecialidadeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public EspecialidadeDTO createEspecialidade(@Valid @RequestBody EspecialidadeCreateRequest especialidadeCreateRequest) {
+       log.trace("createEspecialidade({})", especialidadeCreateRequest);
+        log.info("Entrou no método criar especialidade {}", especialidadeCreateRequest);
         return especialidadeService.createEspecialidade(especialidadeCreateRequest);
     }
 
@@ -47,6 +51,8 @@ public class EspecialidadeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteEspecialidade(@PathVariable Long id) {
+        log.debug("Deletando especialidade {}", id);
         especialidadeService.deleteEspecialidade(id);
+
     }
 }
