@@ -1,0 +1,10 @@
+CREATE TABLE secretarias (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    telefone VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    data_nascimento DATE NOT NULL,
+    pis VARCHAR(20) NOT NULL UNIQUE,
+    sexo VARCHAR(20) NOT NULL,
+    rg VARCHAR(20) NOT NULL
+);

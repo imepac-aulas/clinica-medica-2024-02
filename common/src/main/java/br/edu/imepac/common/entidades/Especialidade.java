@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name = "especialidades")
 @Getter
 @Setter
 @AllArgsConstructor
