@@ -1,9 +1,11 @@
 package br.edu.imepac.agendamento.dtos.consulta;
 
 import br.edu.imepac.common.utils.StatusConsultaEnum;
+import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 public class ConsultaDTO {
     private Long id;
