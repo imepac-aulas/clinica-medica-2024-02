@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.exceptions;
+package br.edu.imepac.common.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

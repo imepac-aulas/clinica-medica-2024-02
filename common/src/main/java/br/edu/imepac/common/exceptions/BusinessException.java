@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.exceptions;
+package br.edu.imepac.common.exceptions;
 
 public class BusinessException extends RuntimeException {
     public BusinessException(String message) {

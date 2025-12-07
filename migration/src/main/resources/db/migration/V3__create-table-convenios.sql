@@ -3,5 +3,6 @@ CREATE TABLE convenios (
     nome VARCHAR(255) NOT NULL UNIQUE,
     cnpj VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
-    telefone VARCHAR(255) NOT NULL
+    telefone VARCHAR(255) NOT NULL,
+    status VARCHAR(20) NOT NULL
 );

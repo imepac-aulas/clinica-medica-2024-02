@@ -4,7 +4,7 @@ import br.edu.imepac.administrativo.dtos.medico.MedicoCreateRequest;
 import br.edu.imepac.administrativo.dtos.medico.MedicoDTO;
 import br.edu.imepac.administrativo.dtos.medico.MedicoUpdateRequest;
 import br.edu.imepac.administrativo.repository.MedicoRepository;
-import br.edu.imepac.agendamento.exceptions.ResourceNotFoundException;
+import br.edu.imepac.common.exceptions.ResourceNotFoundException;
 import br.edu.imepac.common.entidades.Medico;
 import org.springframework.stereotype.Service;
 
