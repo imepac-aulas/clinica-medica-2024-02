@@ -3,7 +3,7 @@ package br.edu.imepac.administrativo.controllers;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioCreateRequest;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioDTO;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioUpdateRequest;
-import br.edu.imepac.administrativo.service.ConvenioService;
+import br.edu.imepac.administrativo.services.ConvenioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

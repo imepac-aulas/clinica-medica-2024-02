@@ -3,7 +3,7 @@ package br.edu.imepac.administrativo.controllers;
 import br.edu.imepac.administrativo.dtos.medico.MedicoCreateRequest;
 import br.edu.imepac.administrativo.dtos.medico.MedicoDTO;
 import br.edu.imepac.administrativo.dtos.medico.MedicoUpdateRequest;
-import br.edu.imepac.administrativo.service.MedicoService;
+import br.edu.imepac.administrativo.services.MedicoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
