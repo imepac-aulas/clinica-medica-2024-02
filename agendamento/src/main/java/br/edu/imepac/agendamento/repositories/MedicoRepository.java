@@ -1,4 +1,4 @@
-package br.edu.imepac.agendamento.repository;
+package br.edu.imepac.agendamento.repositories;
 
 import br.edu.imepac.common.entidades.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;

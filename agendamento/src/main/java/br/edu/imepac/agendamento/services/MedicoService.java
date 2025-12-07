@@ -1,7 +1,7 @@
 package br.edu.imepac.agendamento.services;
 
 import br.edu.imepac.common.exceptions.ResourceNotFoundException;
-import br.edu.imepac.agendamento.repository.MedicoRepository;
+import br.edu.imepac.agendamento.repositories.MedicoRepository;
 import br.edu.imepac.common.entidades.Medico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

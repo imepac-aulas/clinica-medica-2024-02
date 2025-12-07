@@ -1,4 +1,4 @@
-package br.edu.imepac.administrativo.repository;
+package br.edu.imepac.administrativo.repositories;
 
 import br.edu.imepac.common.entidades.Convenio;
 import br.edu.imepac.common.utils.StatusConvenioEnum;

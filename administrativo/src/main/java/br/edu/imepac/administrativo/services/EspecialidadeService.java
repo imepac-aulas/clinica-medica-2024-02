@@ -1,9 +1,10 @@
-package br.edu.imepac.administrativo.service;
+package br.edu.imepac.administrativo.services;
 
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeCreateRequest;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeUpdateRequest;
-import br.edu.imepac.administrativo.repository.EspecialidadeRepository;
+import br.edu.imepac.administrativo.exceptions.ResourceNotFoundException;
+import br.edu.imepac.administrativo.repositories.EspecialidadeRepository;
 import br.edu.imepac.common.entidades.Especialidade;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -41,23 +42,23 @@ public class EspecialidadeService {
         Especialidade especialidade = especialidadeRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error("findEspecialidadeById {}", id);
-                   return new RuntimeException("Especialidade not found with id: " + id);
+                    return new ResourceNotFoundException("Especialidade não encontrada com id: " + id);
                 });
         return modelMapper.map(especialidade, EspecialidadeDTO.class);
     }
 
     public EspecialidadeDTO updateEspecialidade(Long id, EspecialidadeUpdateRequest especialidadeUpdateRequest) {
         Especialidade especialidade = especialidadeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Especialidade not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Especialidade não encontrada com id: " + id));
 
-        especialidade.setDescricao(especialidadeUpdateRequest.getDescricao());
+        modelMapper.map(especialidadeUpdateRequest, especialidade);
         Especialidade updatedEspecialidade = especialidadeRepository.save(especialidade);
         return modelMapper.map(updatedEspecialidade, EspecialidadeDTO.class);
     }
 
     public void deleteEspecialidade(Long id) {
         if (!especialidadeRepository.existsById(id)) {
-            throw new RuntimeException("Especialidade not found with id: " + id);
+            throw new ResourceNotFoundException("Especialidade não encontrada com id: " + id);
         }
         especialidadeRepository.deleteById(id);
     }

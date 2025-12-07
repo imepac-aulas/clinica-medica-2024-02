@@ -24,6 +24,4 @@ public class Paciente extends Pessoa {
     @Column(length = 14, nullable = false, unique = true)
     private String cpf;
 
-    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
-    private List<Consulta> consultas;
 }

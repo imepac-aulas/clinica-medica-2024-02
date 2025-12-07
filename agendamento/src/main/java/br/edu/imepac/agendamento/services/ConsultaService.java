@@ -4,7 +4,7 @@ import br.edu.imepac.agendamento.dtos.consulta.ConsultaCreateRequest;
 import br.edu.imepac.agendamento.dtos.consulta.ConsultaDTO;
 import br.edu.imepac.agendamento.dtos.consulta.ConsultaUpdateRequest;
 import br.edu.imepac.common.exceptions.ResourceNotFoundException;
-import br.edu.imepac.agendamento.repository.ConsultaRepository;
+import br.edu.imepac.agendamento.repositories.ConsultaRepository;
 import br.edu.imepac.common.entidades.Consulta;
 import br.edu.imepac.common.entidades.Convenio;
 import br.edu.imepac.common.entidades.Medico;
