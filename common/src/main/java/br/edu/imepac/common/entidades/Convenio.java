@@ -1,12 +1,11 @@
 package br.edu.imepac.common.entidades;
 
+import br.edu.imepac.common.utils.StatusConvenioEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
@@ -15,6 +14,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Convenio {
 
     @Id
@@ -37,4 +37,8 @@ public class Convenio {
 
     @NotBlank(message = "O telefone é obrigatório.")
     private String telefone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusConvenioEnum status;
 }

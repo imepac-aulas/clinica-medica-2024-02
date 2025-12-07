@@ -1,9 +1,9 @@
-package br.edu.imepac.administrativo.services;
+package br.edu.imepac.administrativo.service;
 
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeCreateRequest;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeUpdateRequest;
-import br.edu.imepac.administrativo.repositories.EspecialidadeRepository;
+import br.edu.imepac.administrativo.repository.EspecialidadeRepository;
 import br.edu.imepac.common.entidades.Especialidade;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
