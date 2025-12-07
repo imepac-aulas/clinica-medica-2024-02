@@ -1,4 +1,4 @@
-package br.edu.imepac.administrativo.repositories;
+package br.edu.imepac.administrativo.repository;
 
 import br.edu.imepac.common.entidades.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
