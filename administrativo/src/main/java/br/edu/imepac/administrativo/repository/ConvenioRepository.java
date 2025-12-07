@@ -18,4 +18,6 @@ public interface ConvenioRepository extends JpaRepository<Convenio, Long> {
     Optional<Convenio> findByNomeIgnoreCase(String nome);
 
     List<Convenio> findByStatus(StatusConvenioEnum status);
+
+    boolean existsByCnpj(String cnpj);
 }

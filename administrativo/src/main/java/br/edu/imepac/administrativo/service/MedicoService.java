@@ -1,4 +1,4 @@
-package br.edu.imepac.administrativo.services;
+package br.edu.imepac.administrativo.service;
 
 import br.edu.imepac.administrativo.dtos.medico.MedicoCreateRequest;
 import br.edu.imepac.administrativo.dtos.medico.MedicoDTO;

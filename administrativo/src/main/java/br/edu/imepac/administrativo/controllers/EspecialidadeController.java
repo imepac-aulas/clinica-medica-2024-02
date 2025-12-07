@@ -3,7 +3,7 @@ package br.edu.imepac.administrativo.controllers;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeCreateRequest;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeUpdateRequest;
-import br.edu.imepac.administrativo.services.EspecialidadeService;
+import br.edu.imepac.administrativo.service.EspecialidadeService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

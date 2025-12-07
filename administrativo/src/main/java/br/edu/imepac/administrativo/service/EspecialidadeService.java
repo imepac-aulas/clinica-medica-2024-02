@@ -1,4 +1,4 @@
-package br.edu.imepac.administrativo.services;
+package br.edu.imepac.administrativo.service;
 
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeCreateRequest;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
