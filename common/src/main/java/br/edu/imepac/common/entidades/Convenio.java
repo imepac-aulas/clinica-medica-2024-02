@@ -26,7 +26,6 @@ public class Convenio {
     private String nome;
 
     @NotBlank(message = "O CNPJ é obrigatório.")
-    @CNPJ(message = "CNPJ inválido.")
     @Column(nullable = false, unique = true)
     private String cnpj;
 
