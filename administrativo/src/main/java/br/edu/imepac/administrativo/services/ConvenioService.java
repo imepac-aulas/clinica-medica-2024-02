@@ -1,4 +1,4 @@
-package br.edu.imepac.administrativo.service;
+package br.edu.imepac.administrativo.services;
 
 
 import br.edu.imepac.common.entidades.Convenio;
@@ -6,7 +6,7 @@ import br.edu.imepac.common.utils.StatusConvenioEnum;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioCreateRequest;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioDTO;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioUpdateRequest;
-import br.edu.imepac.administrativo.repository.ConvenioRepository;
+import br.edu.imepac.administrativo.repositories.ConvenioRepository;
 import br.edu.imepac.administrativo.exceptions.ConvenioDuplicadoException;
 import br.edu.imepac.administrativo.exceptions.ConvenioNaoEncontradoException;
 import lombok.RequiredArgsConstructor;

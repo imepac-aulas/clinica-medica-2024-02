@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan("br.edu.imepac.common.entidades")
-@EnableJpaRepositories("br.edu.imepac.administrativo.repository")
+@EnableJpaRepositories("br.edu.imepac.administrativo.repositories")
 public class
 AdministrativoApplication {
 
