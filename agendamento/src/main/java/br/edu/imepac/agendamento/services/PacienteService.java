@@ -117,4 +117,10 @@ public class PacienteService {
         response.setDataNascimento(paciente.getDataNascimento());
         return response;
     }
+    @Transactional(readOnly = true)
+    public Paciente buscarEntidadePorId(Long id) {
+        return pacienteRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado com id: " + id));
+    }
+
 }
