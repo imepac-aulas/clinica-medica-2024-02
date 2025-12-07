@@ -3,12 +3,10 @@ package br.edu.imepac.administrativo.services;
 import br.edu.imepac.administrativo.dtos.paciente.PacienteCreateRequest;
 import br.edu.imepac.administrativo.dtos.paciente.PacienteDTO;
 import br.edu.imepac.administrativo.dtos.paciente.PacienteUpdateRequest;
-import br.edu.imepac.administrativo.exceptions.BusinessException;
 import br.edu.imepac.administrativo.exceptions.ResourceNotFoundException;
-import br.edu.imepac.common.apis.PacienteResponse;
-import br.edu.imepac.common.entidades.Paciente;
 import br.edu.imepac.administrativo.repositories.PacienteRepository;
-import lombok.RequiredArgsConstructor;
+import br.edu.imepac.common.entidades.Paciente;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,115 +14,52 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
+    private final ModelMapper modelMapper;
 
-    @Transactional
-    public PacienteDTO criar(PacienteCreateRequest request) {
-
-        if (request.getCpf() == null || request.getCpf().isBlank()) {
-            throw new BusinessException("CPF é obrigatório.");
-        }
-        if (pacienteRepository.existsByCpf(request.getCpf())) {
-            throw new BusinessException("Já existe um paciente cadastrado com este CPF.");
-        }
-
-        if (request.getNumeroCartaoSUS() == null || request.getNumeroCartaoSUS().isBlank()) {
-            throw new BusinessException("Número do cartão SUS é obrigatório.");
-        }
-        if (pacienteRepository.existsByNumeroCartaoSUS(request.getNumeroCartaoSUS())) {
-            throw new BusinessException("Já existe um paciente cadastrado com este número de cartão SUS.");
-        }
-
-        Paciente paciente = new Paciente();
-        paciente.setNome(request.getNome());
-        paciente.setTelefone(request.getTelefone());
-        paciente.setEmail(request.getEmail());
-        paciente.setDataNascimento(request.getDataNascimento());
-        paciente.setCpf(request.getCpf());
-        paciente.setNumeroCartaoSUS(request.getNumeroCartaoSUS());
-
-        paciente = pacienteRepository.save(paciente);
-
-        return PacienteDTO.fromEntity(paciente);
+    public PacienteService(PacienteRepository pacienteRepository, ModelMapper modelMapper) {
+        this.pacienteRepository = pacienteRepository;
+        this.modelMapper = modelMapper;
     }
 
-    public List<PacienteDTO> listar() {
-        return pacienteRepository.findAll()
-                .stream()
-                .map(PacienteDTO::fromEntity)
+    @Transactional
+    public PacienteDTO create(PacienteCreateRequest pacienteRequest) {
+        Paciente paciente = modelMapper.map(pacienteRequest, Paciente.class);
+        Paciente savedPaciente = pacienteRepository.save(paciente);
+        return modelMapper.map(savedPaciente, PacienteDTO.class);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PacienteDTO> findAll() {
+        return pacienteRepository.findAll().stream()
+                .map(paciente -> modelMapper.map(paciente, PacienteDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public PacienteDTO buscarPorId(Long id) {
+    @Transactional(readOnly = true)
+    public PacienteDTO findById(Long id) {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado com id: " + id));
-        return PacienteDTO.fromEntity(paciente);
+        return modelMapper.map(paciente, PacienteDTO.class);
     }
 
     @Transactional
-    public PacienteDTO atualizar(Long id, PacienteUpdateRequest request) {
+    public PacienteDTO update(Long id, PacienteUpdateRequest pacienteRequest) {
         Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado com id: " + id));
-
-        if (request.getCpf() != null && !request.getCpf().equals(paciente.getCpf())) {
-            if (pacienteRepository.existsByCpf(request.getCpf())) {
-                throw new BusinessException("Outro paciente já possui este CPF.");
-            }
-            paciente.setCpf(request.getCpf());
-        }
-
-        if (request.getNumeroCartaoSUS() != null &&
-                !request.getNumeroCartaoSUS().equals(paciente.getNumeroCartaoSUS())) {
-
-            if (pacienteRepository.existsByNumeroCartaoSUS(request.getNumeroCartaoSUS())) {
-                throw new BusinessException("Outro paciente já possui este número de cartão SUS.");
-            }
-            paciente.setNumeroCartaoSUS(request.getNumeroCartaoSUS());
-        }
-
-        paciente.setNome(request.getNome());
-        paciente.setTelefone(request.getTelefone());
-        paciente.setEmail(request.getEmail());
-        paciente.setDataNascimento(request.getDataNascimento());
-
-        paciente = pacienteRepository.save(paciente);
-
-        return PacienteDTO.fromEntity(paciente);
+        
+        modelMapper.map(pacienteRequest, paciente);
+        Paciente updatedPaciente = pacienteRepository.save(paciente);
+        return modelMapper.map(updatedPaciente, PacienteDTO.class);
     }
 
     @Transactional
-    public void remover(Long id) {
+    public void delete(Long id) {
         if (!pacienteRepository.existsById(id)) {
             throw new ResourceNotFoundException("Paciente não encontrado com id: " + id);
         }
         pacienteRepository.deleteById(id);
-    }
-
-
-    // Integração entre módulos
-    public PacienteResponse buscarParaIntegracao(Long id) {
-        Paciente paciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado"));
-
-        PacienteResponse response = new PacienteResponse();
-        response.setId(paciente.getId());
-        response.setNome(paciente.getNome());
-        response.setTelefone(paciente.getTelefone());
-        response.setEmail(paciente.getEmail());
-        response.setCpf(paciente.getCpf());
-        response.setNumeroCartaoSUS(paciente.getNumeroCartaoSUS());
-        response.setDataNascimento(paciente.getDataNascimento());
-
-        return response;
-    }
-
-    @Transactional(readOnly = true)
-    public Paciente buscarEntidadePorId(Long id) {
-        return pacienteRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Paciente não encontrado com id: " + id));
     }
 }

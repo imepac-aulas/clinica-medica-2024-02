@@ -3,7 +3,9 @@ package br.edu.imepac.administrativo.controllers;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeCreateRequest;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeDTO;
 import br.edu.imepac.administrativo.dtos.especialidade.EspecialidadeUpdateRequest;
+import br.edu.imepac.administrativo.dtos.medico.MedicoDTO;
 import br.edu.imepac.administrativo.services.EspecialidadeService;
+import br.edu.imepac.administrativo.services.MedicoService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,42 +19,44 @@ import java.util.List;
 public class EspecialidadeController {
 
     private final EspecialidadeService especialidadeService;
+    private final MedicoService medicoService;
 
-    public EspecialidadeController(EspecialidadeService especialidadeService) {
+    public EspecialidadeController(EspecialidadeService especialidadeService, MedicoService medicoService) {
         this.especialidadeService = especialidadeService;
+        this.medicoService = medicoService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public EspecialidadeDTO createEspecialidade(@Valid @RequestBody EspecialidadeCreateRequest especialidadeCreateRequest) {
-       log.trace("createEspecialidade({})", especialidadeCreateRequest);
-        log.info("Entrou no método criar especialidade {}", especialidadeCreateRequest);
-        return especialidadeService.createEspecialidade(especialidadeCreateRequest);
+    public EspecialidadeDTO create(@Valid @RequestBody EspecialidadeCreateRequest especialidadeRequest) {
+        log.info("Criando nova especialidade: {}", especialidadeRequest);
+        return especialidadeService.createEspecialidade(especialidadeRequest);
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<EspecialidadeDTO> findAllEspecialidades() {
+    public List<EspecialidadeDTO> findAll() {
         return especialidadeService.findAllEspecialidades();
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public EspecialidadeDTO findEspecialidadeById(@PathVariable Long id) {
+    public EspecialidadeDTO findById(@PathVariable Long id) {
         return especialidadeService.findEspecialidadeById(id);
     }
 
-    @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{id}")
-    public EspecialidadeDTO updateEspecialidade(@PathVariable Long id, @Valid @RequestBody EspecialidadeUpdateRequest especialidadeUpdateRequest) {
-        return especialidadeService.updateEspecialidade(id, especialidadeUpdateRequest);
+    public EspecialidadeDTO update(@PathVariable Long id, @Valid @RequestBody EspecialidadeUpdateRequest especialidadeRequest) {
+        return especialidadeService.updateEspecialidade(id, especialidadeRequest);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteEspecialidade(@PathVariable Long id) {
-        log.debug("Deletando especialidade {}", id);
+    public void delete(@PathVariable Long id) {
+        log.debug("Deletando especialidade com id: {}", id);
         especialidadeService.deleteEspecialidade(id);
+    }
 
+    @GetMapping("/{id}/medicos")
+    public List<MedicoDTO> findMedicosByEspecialidade(@PathVariable Long id) {
+        return medicoService.findMedicosByEspecialidadeId(id);
     }
 }

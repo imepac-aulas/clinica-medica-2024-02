@@ -5,60 +5,46 @@ import br.edu.imepac.administrativo.dtos.convenio.ConvenioDTO;
 import br.edu.imepac.administrativo.dtos.convenio.ConvenioUpdateRequest;
 import br.edu.imepac.administrativo.services.ConvenioService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/administrativo/convenios")
-@RequiredArgsConstructor
+@RequestMapping("/api/convenios")
 public class ConvenioController {
 
     private final ConvenioService convenioService;
 
+    public ConvenioController(ConvenioService convenioService) {
+        this.convenioService = convenioService;
+    }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<ConvenioDTO> criar(
-            @RequestBody @Valid ConvenioCreateRequest request
-    ) {
-        ConvenioDTO dto = convenioService.criar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    public ConvenioDTO create(@Valid @RequestBody ConvenioCreateRequest convenioRequest) {
+        return convenioService.create(convenioRequest);
     }
 
     @GetMapping
-    public ResponseEntity<List<ConvenioDTO>> listarTodos() {
-        return ResponseEntity.ok(convenioService.listarTodos());
+    public List<ConvenioDTO> findAll() {
+        return convenioService.findAll();
     }
-
 
     @GetMapping("/{id}")
-    public ResponseEntity<ConvenioDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(convenioService.buscarPorId(id));
+    public ConvenioDTO findById(@PathVariable Long id) {
+        return convenioService.findById(id);
     }
-
 
     @PutMapping("/{id}")
-    public ResponseEntity<ConvenioDTO> atualizar(
-            @PathVariable Long id,
-            @RequestBody @Valid ConvenioUpdateRequest request
-    ) {
-        return ResponseEntity.ok(convenioService.atualizar(id, request));
+    public ConvenioDTO update(@PathVariable Long id, @Valid @RequestBody ConvenioUpdateRequest convenioRequest) {
+        return convenioService.update(id, convenioRequest);
     }
 
-
-    @PatchMapping("/{id}/inativar")
-    public ResponseEntity<Void> inativar(@PathVariable Long id) {
-        convenioService.inativar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-
-    @PatchMapping("/{id}/ativar")
-    public ResponseEntity<Void> ativar(@PathVariable Long id) {
-        convenioService.ativar(id);
-        return ResponseEntity.noContent().build();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        // A lógica de negócio no service trata a deleção como uma inativação
+        convenioService.delete(id);
     }
 }

@@ -4,49 +4,46 @@ import br.edu.imepac.administrativo.dtos.paciente.PacienteCreateRequest;
 import br.edu.imepac.administrativo.dtos.paciente.PacienteDTO;
 import br.edu.imepac.administrativo.dtos.paciente.PacienteUpdateRequest;
 import br.edu.imepac.administrativo.services.PacienteService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/administrativo/pacientes")
-@RequiredArgsConstructor
+@RequestMapping("/api/pacientes")
 public class PacienteController {
 
     private final PacienteService pacienteService;
 
+    public PacienteController(PacienteService pacienteService) {
+        this.pacienteService = pacienteService;
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<PacienteDTO> criar(@Valid @RequestBody PacienteCreateRequest request) {
-        PacienteDTO criado = pacienteService.criar(request);
-        URI location = URI.create(String.format("/administrativo/pacientes/%d", criado.getId()));
-        return ResponseEntity.created(location).body(criado);
+    public PacienteDTO create(@Valid @RequestBody PacienteCreateRequest pacienteRequest) {
+        return pacienteService.create(pacienteRequest);
     }
 
     @GetMapping
-    public ResponseEntity<List<PacienteDTO>> listar() {
-        return ResponseEntity.ok(pacienteService.listar());
+    public List<PacienteDTO> findAll() {
+        return pacienteService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(pacienteService.buscarPorId(id));
+    public PacienteDTO findById(@PathVariable Long id) {
+        return pacienteService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PacienteDTO> atualizar(
-            @PathVariable Long id,
-            @Valid @RequestBody PacienteUpdateRequest request
-    ) {
-        return ResponseEntity.ok(pacienteService.atualizar(id, request));
+    public PacienteDTO update(@PathVariable Long id, @Valid @RequestBody PacienteUpdateRequest pacienteRequest) {
+        return pacienteService.update(id, pacienteRequest);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable Long id) {
-        pacienteService.remover(id);
-        return ResponseEntity.noContent().build();
+    public void delete(@PathVariable Long id) {
+        pacienteService.delete(id);
     }
 }
