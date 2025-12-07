@@ -2,7 +2,6 @@ package br.edu.imepac.common.entidades;
 
 import br.edu.imepac.common.utils.StatusConsultaEnum;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -39,7 +38,6 @@ public class Consulta {
     private String carteiraConvenio;
 
     @NotNull(message = "A data e hora da consulta são obrigatórias.")
-    @Future(message = "A data e hora da consulta devem ser no futuro.")
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 

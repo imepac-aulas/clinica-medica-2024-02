@@ -16,5 +16,13 @@ public class ProntuarioDTO {
     private LocalDateTime dataAbertura;
     private LocalDateTime dataUltimaAtualizacao;
     private String observacoes;
-    private Long consultaId;
+    private ConsultaDTO consulta;
+
+    @Data
+    public static class ConsultaDTO {
+        private Long id;
+        private LocalDateTime dataHora;
+        private Long pacienteId;
+        private Long medicoId;
+    }
 }
