@@ -1,13 +1,12 @@
 package br.edu.imepac.agendamento.services;
 
 import br.edu.imepac.agendamento.dtos.convenio.ConvenioDTO;
-import br.edu.imepac.agendamento.exceptions.ResourceNotFoundException;
+import br.edu.imepac.common.exceptions.ResourceNotFoundException;
 import br.edu.imepac.agendamento.repositories.ConvenioRepository;
 import br.edu.imepac.common.entidades.Convenio;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;

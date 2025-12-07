@@ -1,11 +1,12 @@
 package br.edu.imepac.agendamento.services;
 
-import br.edu.imepac.agendamento.exceptions.ResourceNotFoundException;
+import br.edu.imepac.common.exceptions.ResourceNotFoundException;
 import br.edu.imepac.agendamento.repositories.MedicoRepository;
 import br.edu.imepac.common.entidades.Medico;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
