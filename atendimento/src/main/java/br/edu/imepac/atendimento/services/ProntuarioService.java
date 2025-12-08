@@ -28,7 +28,6 @@ public class ProntuarioService {
 
     @Transactional
     public ProntuarioDTO criar(ProntuarioCreateRequest request) {
-        // 1. Fetch the managed Consulta entity. This is the owning side.
         Consulta consulta = consultaRepository.findById(request.getConsultaId())
                 .orElseThrow(() -> new RuntimeException("Consulta não encontrada com o ID: " + request.getConsultaId()));
 
@@ -36,20 +35,18 @@ public class ProntuarioService {
             throw new IllegalStateException("Esta consulta já possui um prontuário associado.");
         }
 
-        // 2. Create the Prontuario from the DTO.
         Prontuario novoProntuario = modelMapper.map(request, Prontuario.class);
-
-        // 3. *** THIS IS THE FIX ***
-        // Manually synchronize both sides of the bidirectional relationship.
-        // This replaces the transient Consulta inside novoProntuario with the managed one.
-        novoProntuario.setConsulta(consulta);
         consulta.setProntuario(novoProntuario);
 
-        // 4. Save the owning side. Cascade will persist the Prontuario correctly
-        // because the object graph is now consistent.
+        // 5. Save the Consulta. Due to CascadeType.ALL, Hibernate saves the Prontuario first,
+        // gets its ID, and then saves the Consulta with the foreign key.
         Consulta consultaSalva = consultaRepository.save(consulta);
 
-        return modelMapper.map(consultaSalva.getProntuario(), ProntuarioDTO.class);
+        // 6. The saved Prontuario is now available inside the saved Consulta.
+        Prontuario prontuarioSalvo = consultaSalva.getProntuario();
+
+        // 7. Map the saved Prontuario to its DTO and return.
+        return modelMapper.map(prontuarioSalvo, ProntuarioDTO.class);
     }
 
     public List<ProntuarioDTO> listar() {

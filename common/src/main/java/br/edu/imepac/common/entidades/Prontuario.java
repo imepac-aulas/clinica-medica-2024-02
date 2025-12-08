@@ -23,15 +23,19 @@ public class Prontuario {
     private Long id;
 
     @NotBlank(message = "A queixa principal é obrigatória.")
+    @Column(name = "queixa_principal", nullable = false, columnDefinition = "TEXT")
     private String queixaPrincipal;
 
     @NotBlank(message = "O diagnóstico é obrigatório.")
     private String diagnostico;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "historico_medico",
+            columnDefinition = "TEXT")
     private String historicoMedico;
 
     private String alergias;
+
+    @Column(name = "medicamentos_em_uso", columnDefinition = "TEXT")
     private String medicamentosEmUso;
 
     @Column(name = "exames_solicitados", columnDefinition = "TEXT")
