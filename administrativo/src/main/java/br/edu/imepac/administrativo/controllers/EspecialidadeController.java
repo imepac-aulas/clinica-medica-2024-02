@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
+
+@Tag(name = "Especialidades", description = "Operações sobre Especialidades")
 @RestController
 @RequestMapping("/api/especialidades")
 @Slf4j
@@ -28,6 +32,7 @@ public class EspecialidadeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @Operation
     public EspecialidadeDTO create(@Valid @RequestBody EspecialidadeCreateRequest especialidadeRequest) {
         log.info("Criando nova especialidade: {}", especialidadeRequest);
         return especialidadeService.createEspecialidade(especialidadeRequest);
